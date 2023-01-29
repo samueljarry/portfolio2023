@@ -1,0 +1,284 @@
+@import '_var';
+@import '_breakpoints';
+
+.home
+{
+  position:absolute;
+  width: 100%;
+  background: #F0F0F0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  user-select: none;
+
+  .landing_canvas
+  {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    z-index: 5;
+    canvas
+    {
+      position: relative;
+      top:0;
+      left:0;
+
+      width: 100vw !important;
+      height: 100vh !important;
+    }
+
+    .header_marquee
+    {
+      position: absolute;
+      top: 30vh;
+      left: 0;
+      width: 100%;
+      height: 40vh;
+      color:black;
+
+      display: flex;
+      align-items: center;
+
+      overflow:hidden;
+      margin-bottom: $smMargin;
+      white-space: nowrap;
+      font-size: 33vh;
+      padding: 10px 0;
+
+
+      @include lg
+      {
+        top: 22.5vh;
+        height: 55vh;
+      }
+
+      .marquee_item
+      {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        height: 80%;
+        width: fit-content;
+        left: 50px;
+        padding: 0;
+        flex-shrink: 0;
+
+        text-transform: uppercase;
+        font-family: $mainFont;
+
+        span
+        {
+          user-select: none;
+        }
+      }
+    }
+
+    .corners_content
+    {
+      width:100vw;
+      height:100vh;
+
+      display: flex;
+      flex-direction:column;
+      justify-content: space-between;
+
+      padding: 30px 30px 90px 30px;
+
+      &_bottom
+      {
+        .developer
+        {
+          padding: 0 30px;
+        }
+
+        .webgl, .front
+        {
+          color: orangered;
+          font-style:italic;
+        }
+      }
+
+      &_top
+      {
+        display: flex;
+        width:100%;
+        justify-content: space-between;
+
+        a
+        {
+          position:relative;
+          width: 40px;
+          height: 40px;
+
+          display: flex;
+          justify-content: center;
+          align-items: flex-start;
+
+          img
+          {
+            width: 40px;
+          }
+        }
+
+        span
+        {
+          text-align: end;
+
+          .portfolio
+          {
+            padding-right: 20px;
+          }
+        }
+
+        .name
+        {
+          text-align: start;
+          .last_name
+          {
+            padding-left: 30px;
+
+            @include lg
+            {
+              padding-left: 50px;
+            }
+          }
+        }
+      }
+
+      @include lg
+      {
+        padding: 40px;
+      }
+    }
+  }
+
+  &_landing_section
+  {
+    width:100vw;
+    height:100vh;
+    min-height:100vh;
+  }
+}
+
+.about_wrapper
+{
+  opacity: 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100vw;
+  min-height: 70vh;
+  padding: $smPadding;
+  margin-bottom: $smPadding * 2;
+
+  @include md
+  {
+    height: 50vh;
+    margin-bottom: 0;
+    flex-direction: row;
+    min-height: unset;
+  }
+
+  .about_strong
+  {
+    width: 100%;
+    border-radius: 10px;
+    height: 50vh;
+    min-height: 300px;
+    color:white;
+    font-size: $smFontSize * 1.3;
+    line-height: calc(($smFontSize * 1.3) * 1.4);
+    background: #212223;
+    padding: $smPadding;
+
+    margin-bottom: $smMargin * 1.5;
+
+    @include lg
+    {
+      width: 48%;
+      height: 100%;
+      padding: $lgPadding;
+      margin-bottom: unset;
+    }
+
+    strong
+    {
+      font-weight: 100;
+    }
+  }
+
+  .about_memoji
+  {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20vh;
+    img
+    {
+      width: 100%;
+    }
+
+    @include lg
+    {
+      height: 100%;
+      width: 48%;
+
+      img
+      {
+        width: 75%;
+      }
+    }
+  }
+}
+
+.responsive_projects
+{
+  top: $smMargin;
+  position:relative;
+  width: 100vw;
+
+  @include md
+  {
+    height: 200px;
+
+    strong
+    {
+      font-size: $smHeading * 1.1;
+    }
+  }
+
+  .projects_heading
+  {
+    width:100%;
+    text-align: center;
+    font-size: $smHeading;
+    strong
+    {
+      font-weight: 400;
+
+      &:last-child
+      {
+        font-family: $secondFont;
+        font-style: italic;
+      }
+    }
+  }
+}
+
+.landing_anim
+{
+  width:100vw;
+  height:100vh;
+  background:black;
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1000;
+}

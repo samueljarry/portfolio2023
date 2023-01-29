@@ -1,0 +1,49 @@
+@import 'styles/_fonts';
+@import 'styles/_var';
+@import 'styles/_breakpoints';
+@import 'styles/Home';
+
+*, body
+{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  overscroll-behavior: none;
+}
+
+body
+{
+  width:100%;
+  height: fit-content;
+  font-family: $mainFont;
+  font-size: $smFontSize;
+  background: #F0F0F0;
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+
+  &::-webkit-scrollbar
+  {
+    display: none;
+  }
+
+  @include lg
+  {
+    font-size: $lgFontSize;
+  }
+}
+
+a
+{
+  text-decoration: none;
+  color:black;
+}
+
+.preload
+{
+  display: block;
+  position: fixed;
+  top: 0;
+  left:0;
+background: #F0F0F0;
+}

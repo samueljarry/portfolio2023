@@ -1,0 +1,74 @@
+[
+  {
+    "name": "Vibe",
+    "cover": "projects/vibe/cover.png",
+    "phoneCover":"projects/vibe/phoneCover.png",
+    "description": "Vibe est un site de billetterie fictif permettant l'achat de places d'évènements. Il prend en charge un système de connexion / déconnexion utilisateur, une recherche dynamique en AJAX, la gestion d'un panier jusqu'à l'achat et la génération de PDFs récapitulatifs de commande",
+    "techs": ["Symfony", "Javascript"],
+    "images": ["vibe/vibe.png", "vibe/responsive.png"],
+    "videos": ["vibe/accueil.mp4", "vibe/recherche.mp4", "vibe/filtre.mp4"],
+    "url": "https://mmi21c10.sae301dev.ovh/",
+    "banner":"vibe/banner.png",
+    "phoneBanner":"vibe/phoneBanner.png"
+  },
+  {
+    "name": "Flipper Zero",
+    "cover": "projects/flipper/cover.png",
+    "phoneCover": "projects/flipper/phoneCover.png",
+    "description": "Projet réalisé début janvier 2023 présentant les différentes caractéristiques et composants du Flipper Zero via un modèle 3D interactif et déstructurable",
+    "techs": ["React.js", "React Three Fiber (Three.js)"],
+    "images": ["flipper/flipper.png"],
+    "videos": ["flipper/flipper.mp4"],
+    "url": "https://flipper-zero.vercel.app/",
+    "banner": "flipper/banner.png",
+    "phoneBanner": "flipper/phoneBanner.png"
+  },
+  {
+    "name": "Dataviz",
+    "cover": "projects/dataviz/cover.png",
+    "phoneCover": "projects/dataviz/phoneCover.png",
+    "description": "Projet réalisé en Octobre 2022 proposant une étude marketing pour une entreprise fictive via des données structurées et des graphiques interactifs réalisés avec Chart.js et ApexCharts",
+    "techs": ["Javascript", "GSAP"],
+    "images": ["dataviz/dataviz1.png", "dataviz/dataviz2.png"],
+    "videos": ["dataviz/showcase.mp4"],
+    "url": "https://sae303.vercel.app/",
+    "banner": "dataviz/banner.png",
+    "phoneBanner": "dataviz/phoneBanner.png"
+  },
+  {
+    "name": "Porsche",
+    "cover": "projects/porsche/cover.png",
+    "phoneCover": "projects/porsche/phoneCover.png",
+    "description": "Site vitrine réalisé en Novembre 2022 sur l'emblématique Porsche 911 avec un modèle 3D interactif.",
+    "techs": ["React.js", "React Three Fiber (Three.js)", "GSAP"],
+    "images": ["porsche/site.png"],
+    "videos": ["porsche/showcase.mp4"],
+    "url": "https://porsche-911-fawn.vercel.app/",
+    "banner": "porsche/banner.png",
+    "phoneBanner": "porsche/phoneBanner.png"
+  },
+  {
+    "name": "3D Runner",
+    "cover": "projects/runner/cover.png",
+    "phoneCover": "projects/runner/phoneCover.png",
+    "description": "Mini-jeu réalisé en Juin 2022 recréant le ”Chrome Dino” en 3D, il est doté d'un système de connexion/déconnexion et d'un classement des meilleurs scores réalisés par les joueurs",
+    "techs": ["PHP","Three.js"],
+    "images": ["runner/run.png", "runner/jump.png", "runner/score.png"],
+    "videos": ["runner/showcase.mp4"],
+    "url": "https://mmi21c10.mmi-troyes.fr/mmiverse/",
+    "banner": "runner/banner.png",
+    "phoneBanner": "runner/phoneBanner.png"
+  },
+  {
+    "name": "sPhone",
+    "cover": "projects/sphone/cover.png",
+    "phoneCover": "projects/sphone/phoneCover.png",
+    "description": "Site vitrine réalisé en Août 2022 présentant un téléphone fictif permettant de changer la couleur du produit sans rechargement du modèle 3D",
+    "techs": ["Three.js", "GSAP"],
+    "images": ["sphone/img.png", "sphone/responsive.png"],
+    "videos": ["sphone/showcase.mp4"],
+    "url": "https://phone-display.vercel.app/",
+    "banner": "sphone/banner.png",
+    "phoneBanner": "sphone/phoneBanner.png"
+  }
+]

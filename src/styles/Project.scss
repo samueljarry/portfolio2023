@@ -1,0 +1,285 @@
+@import './var';
+@import './breakpoints';
+
+.projects_wrapper
+{
+  width:100vw;
+  font-family: $mainFontBook;
+  margin-top: 50px;
+  background: #F0F0F0;
+
+  .projects_nav
+  {
+    position:fixed;
+    top:0;
+    left:0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 50px;
+    padding: $smPadding * 0.5 $smPadding;
+    border-bottom: 1px solid black;
+
+    background: #F0F0F0;
+    z-index: 2;
+
+    .linktree
+    {
+      display: flex;
+      align-items: center;
+      width: 25px;
+      height: 25px;
+    }
+  }
+
+  .projects_header
+    {
+      position:relative;
+      width:100%;
+      height: calc(70vh - 50px);
+      padding: $smPadding;
+      padding-bottom: 20px;
+
+      @include lg
+      {
+        height: calc(50vh - 50px);
+        min-height: 400px;
+      }
+
+      &_infos
+      {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+
+        @include sm
+        {
+          justify-content: space-between;
+        }
+
+        @include lg
+        {
+          justify-content: space-between;
+        }
+
+        h1
+        {
+          font-weight: 300;
+          font-size: $smHeading * 0.7;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+
+          @include lg
+          {
+            margin-top: 40px;
+          }
+        }
+
+        strong
+        {
+          font-size: $smFontSize;
+          font-weight: 300;
+          margin-bottom: $smMargin * 0.25;
+          line-height: calc(($smFontSize) * 1.5);
+
+          @include lg
+          {
+            font-size: 20px;
+            line-height: calc(20px * 1.5);
+          }
+        }
+
+        span
+        {
+          font-weight: 300;
+          font-size: $smFontSize;
+
+          @include lg
+          {
+            font-size: 20px;
+          }
+        }
+
+        /* Desktop */
+        &_heading
+        {
+          font-size: $smHeading * 0.7;
+          margin-bottom: 20px;
+          text-transform: uppercase;
+          text-align: center;
+
+          h1
+          {
+            font-weight: 300;
+            text-align: center;
+            font-size: 4rem;
+          }
+        }
+
+        &_list
+        {
+          display: flex;
+          justify-content: space-between;
+          width:100%;
+          align-items: flex-end;
+
+          .link_container, .tech_container, .description_container
+          {
+            font-size: 20px;
+            width:33%;
+          }
+
+          .link_container, .tech_container
+          {
+            display: flex;
+            justify-content: center;
+          }
+
+          .tech_container
+          {
+            justify-content: end;
+          }
+        }
+      }
+    }
+  .projects_cover
+  {
+    position:relative;
+    width: 100vw;
+    height: 30vh;
+
+    overflow: hidden;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+    background-position-x: center;
+
+    @include lg
+    {
+      height: 60vh;
+      min-height: 400px;
+    }
+  }
+
+  .projects_gallery
+  {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position:relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 10px;
+
+
+    @include lg
+    {
+      padding-top: 0;
+      margin: 20px auto;
+      margin-top: -10vh;
+      width: 70%;
+    }
+
+    video, img
+    {
+      width: 100%;
+      margin-bottom:5px;
+
+      @include lg
+      {
+        margin-bottom: 20px;
+      }
+    }
+
+    img
+    {
+      &:last-child
+      {
+        margin-bottom: 40px;
+      }
+    }
+
+    .responsive
+    {
+      width: 50%;
+      margin: 0 auto;
+
+      @include lg
+      {
+        width: 30%;
+      }
+    }
+  }
+
+  .next_project
+  {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-transform: uppercase;
+    height: 45vh;
+    width: fit-content;
+
+    @include lg
+    {
+      position: relative;
+      height: 60vh;
+    }
+
+    &_span
+    {
+      font-family: $secondFont;
+      font-style:italic;
+      font-size: $smHeading * 0.6;
+      margin-bottom: $smPadding;
+
+      @include lg
+      {
+        font-size: $smHeading ;
+      }
+
+      span
+      {
+        font-family: $mainFont;
+        font-style: normal;
+        padding-left: 10px;
+      }
+    }
+
+    &_name
+    {
+      text-transform: uppercase;
+      text-align: center;
+      font-size: $smHeading * 0.5;
+
+
+      @include lg
+      {
+        font-size: $smHeading * 0.9;
+      }
+    }
+
+    &_cover
+    {
+      position:relative;
+      margin: 0 auto;
+      width: 80%;
+      height: 60vw;
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      z-index: -1;
+
+      transform: rotate(-10deg);
+
+      @include lg
+      {
+        width: 100%;
+      }
+    }
+  }
+}
