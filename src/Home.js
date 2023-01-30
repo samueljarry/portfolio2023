@@ -19,8 +19,6 @@ const Home = ({ gpu }) =>
 
     return <motion.main
         className="home"
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
     >
         <Preload isHomePage />
         <section className="home_landing_section">
@@ -33,15 +31,19 @@ const Home = ({ gpu }) =>
                     <AdaptiveDpr pixelated />
                     <ScrollControls
                         pages={
-                            // Desktop
-                            window.innerWidth > 1024
+                            window.innerWidth > 1024 // Desktop
                                 ? 2.25 + projectSpanHeight
-                                // Responsive
-                                : window.innerHeight < 800
-                                    ? 6.7
-                                    : window.innerHeight > 800
-                                        ? 5.7
-                                        : 2.25 + projectSpanHeight
+                            : window.innerWidth < 1024 && window.innerWidth > 720
+                                ?  6.9
+                            : window.innerWidth <= 720 && window.innerWidth >= 650
+                                ? 6.6
+                            : window.innerWidth <= 720 && window.innerWidth >= 570
+                                ? 6.3
+                            : window.innerWidth < 570 && window.innerHeight < 800 // Phones
+                                ? 6.4
+                            : window.innerHeight > 800
+                                ? 6.2
+                                : 2.25 + projectSpanHeight
                         }
                     >
                         <Scene gpu={ gpu } />
@@ -54,10 +56,11 @@ const Home = ({ gpu }) =>
 
 const Scene = ({ gpu }) =>
 {
-    let isSmallDevice
-    let smallWidth = 1024
+    let mediumWidth = 1024
+    let smallWidth = 600
     const { width, height, factor } = useThree(state => state.viewport)
-    width * factor > smallWidth ? isSmallDevice = false : isSmallDevice = true
+    let isMediumDevice = width * factor <= mediumWidth && width * factor > smallWidth
+    let isSmallDevice = width * factor <= smallWidth
 
     const props =
         {
@@ -65,6 +68,7 @@ const Scene = ({ gpu }) =>
             height,
             factor,
             isSmallDevice,
+            isMediumDevice,
             gpu
         }
 
@@ -73,7 +77,7 @@ const Scene = ({ gpu }) =>
                 <Scroll>
                     <HomeCanvas props={ props } />
                     {
-                        isSmallDevice || gpu.isMobile
+                        isSmallDevice || isMediumDevice || gpu.isMobile
                         ? <Gallery props={ props } />
                         : <DesktopGallery props={props} />
                     }
@@ -100,7 +104,7 @@ const Scene = ({ gpu }) =>
                     </div>
                     <HomeAbout />
                     <section className="responsive_projects">
-                        <ProjectSpan isSmallDevice={isSmallDevice} />
+                        <ProjectSpan props={ props } />
                     </section>
                 </Scroll>
             </>

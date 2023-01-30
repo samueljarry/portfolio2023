@@ -3,14 +3,17 @@ import {useState} from "react";
 import {useScroll} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
 
-const ProjectSpan = ({ isSmallDevice }) =>
+const ProjectSpan = ({ props }) =>
 {
+    const { isSmallDevice, isMediumDevice } = props
+
     const [visible, setVisible] = useState(false)
     const data = useScroll()
 
     useFrame(() =>
     {
-        let areProjectsVisible = isSmallDevice ? data.visible(2/7, 1.5/7) : data.visible((1.75) / 2.25, 1.7 / 2.25)
+        let areProjectsVisible = isSmallDevice ? data.visible(2/7, 1.5/7) : isMediumDevice ? data.visible(1.5/7, 6/7) : data.visible((1.75) / 2.25, 1.7 / 2.25)
+
         areProjectsVisible
             ? setVisible(true)
             : setVisible(false)

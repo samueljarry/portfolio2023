@@ -9,12 +9,18 @@ extend({PlaneShaderMobile})
 
 const Gallery = ({ props }) =>
 {
-    const { height, width, factor } = props
-    let current = height * factor < 800 ? -height * 0.3 : -height * 0.1
-
+    const { height, width, factor, isMediumDevice } = props
+    let current = isMediumDevice && (width*factor) > 720
+                    ? -height * 0.5
+                  : isMediumDevice && (width * factor) >= 650
+                    ? -height * 0.9
+                  : isMediumDevice && (width*factor) <= 720
+                    ? -height * 0.89
+                  : !isMediumDevice && height * factor < 800
+                    ? -height * 0.3
+                    : -height * 0.1
     const navigate = useNavigate()
     const textureLoader = new TextureLoader()
-
     const { textX, textY } = useControls({
         textX:
             {
@@ -32,22 +38,56 @@ const Gallery = ({ props }) =>
             }
     })
 
+    console.log(isMediumDevice)
+
     return (
         <>
             <Leva hidden />
             {
                 projects.map(({name, phoneCover}, index) =>
                 {
-                    if(index !== 0) height * factor < 800 ? current -= height * 0.7 : current -= height * 0.55
+                    if(index !== 0) isMediumDevice && (width * factor) > 720
+                                        ? current -= height * 0.8
+                                    : (width * factor) <= 480 && (height * factor < 800)
+                                        ? current -= height * 0.6
+                                    : (width * factor) <= 720 && (width * factor) >= 650
+                                        ? current -= height * 0.7
+                                    : (width * factor) <= 720
+                                        ? current -= height * 0.65
+                                    : height * factor < 800 // Phones
+                                        ? current -= height * 0.65
+                                        : current -= height * 0.55
+
                     const texture = textureLoader.load(phoneCover)
+
                     return (
                         <mesh
                             key={ index }
-                            scale={ width * 0.9 }
+                            scale={
+                                (width * factor) > 1010
+                                    ?  width * 0.5
+                                : (width * factor) > 960
+                                    ?  width * 0.53
+                                : (width * factor) > 910
+                                    ?  width * 0.57
+                                : (width * factor) > 840
+                                    ?  width * 0.6
+                                : (width * factor) > 760
+                                    ?  width * 0.65
+                                : (width * factor) > 720
+                                    ?  width * 0.7
+                                : (width * factor) <= 480
+                                    ? width * 0.9
+                                :(width * factor) <= 570
+                                    ? width * 0.75
+                                : (width * factor) <= 720
+                                    ? width * 0.68
+                                    : width * 0.9
+                            }
                             onPointerOver={() => document.documentElement.style.cursor = "pointer"}
                             onPointerLeave={() => document.documentElement.style.cursor = "default"}
                             onClick={() =>  navigate(`projects/${name.toLowerCase()}`)}
-                            position={ [0, (2 * -height) + current, 0] }
+                            position={ [0, !isMediumDevice ? (2 * -height) + current : (1.3*-height) + current, 0] }
                         >
                             <Text
                                 font={'fonts/PPNeueMontreal-Medium.ttf'}

@@ -7,7 +7,7 @@ import gsap from "gsap";
 import {horizontalLoop} from "./Utils";
 import {useFrame} from "@react-three/fiber";
 
-const Frame = ({ bloom, noise, smallDevice }) =>
+const Frame = ({ bloom, noise, smallDevice, mediumDevice }) =>
 {
     const hasLanded = { value: false }
 
@@ -21,9 +21,10 @@ const Frame = ({ bloom, noise, smallDevice }) =>
     useFrame(() =>
     {
         if(hasLanded.value) return
+
         else if (document.querySelector('.marquee_item span'))
         {
-            if(!smallDevice)
+            if(!smallDevice && !mediumDevice)
             {
                 gsap.timeline()
                     .set('.marquee_item span',
@@ -86,21 +87,22 @@ const Frame = ({ bloom, noise, smallDevice }) =>
                 hasLanded.value = true
             }
         }
+        else return
     })
 }
 
 const HomeCanvas = ({ props }) =>
 {
-    const {height, width, isSmallDevice, gpu} = props
+    const {height, width, isSmallDevice, isMediumDevice, gpu} = props
     const bloom = useRef()
     const noise = useRef()
     const group = useRef()
 
     return (
         <>
-            <Frame bloom={ bloom } noise={ noise } smallDevice={ isSmallDevice } />
+            <Frame bloom={ bloom } noise={ noise } smallDevice={ isSmallDevice } mediumDevice={ isMediumDevice } />
             {/* Uniquement si ordinateur avec plus de 30 fps */}
-            { !isSmallDevice && gpu.tier > 2 &&
+            { !isSmallDevice && !isMediumDevice && gpu.tier > 2 &&
             <>
                 <EffectComposer
                     multisampling={ 0 }
@@ -125,11 +127,7 @@ const HomeCanvas = ({ props }) =>
             >
                 <Model
                     group={ group }
-                    isSmallDevice={ isSmallDevice }
-                    gpu={ gpu }
-                    ior={ isSmallDevice ? 3 : 1.8}
-                    fresnel={ isSmallDevice ? 0.7: 0.7}
-                    scale={ isSmallDevice ? width * 3.5 : height * 3 }
+                    props={ props }
                 />
             </Center>
         </>

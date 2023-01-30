@@ -10,7 +10,7 @@ const useLerpedMouse = () =>
     const lerped = useRef(mouse.clone())
     const previous = new THREE.Vector2()
 
-    useFrame(state =>
+    useFrame(() =>
     {
         previous.copy(lerped.current)
         lerped.current.lerp(mouse, 0.1)
@@ -19,14 +19,28 @@ const useLerpedMouse = () =>
     return lerped
 }
 
-export function Model({ position, scale, ior, gpu, fresnel, isSmallDevice }) {
-    // Debug
-    //gpu.tier = 1
+export function Model({ props }) {
 
+    const { isSmallDevice, isMediumDevice, gpu, width, height } = props
     const group = useRef()
     const mouse = useLerpedMouse()
     const { nodes } = useGLTF("models/logo.gltf");
     const texture = useLoader(RGBELoader, "assets/studio_small_08_1k.hdr")
+
+    const ior =
+        isSmallDevice
+            ? 3
+            : 1.8
+    const fresnel =
+        isSmallDevice
+            ? 0.7
+            : 0.7
+    const scale =
+        isSmallDevice
+            ? width * 3.5
+        : isMediumDevice
+            ? height * 2.2
+        : height * 3
 
     useFrame(() =>
     {
@@ -41,7 +55,7 @@ export function Model({ position, scale, ior, gpu, fresnel, isSmallDevice }) {
                 scale={ scale }
                 rotation={[1.57, 0, 0]}
             >
-                { isSmallDevice || gpu.tier < 2
+                { isSmallDevice || isMediumDevice || gpu.tier < 2
                     ? <meshStandardMaterial color="gray" metalness={ 0.6 } roughness={ 0.17 } envMapIntensity={ 3.5 } />
                     : <MeshRefractionMaterial bounces={ 2 } ior={ ior } fresnel={ fresnel } envMap={ texture } />
                 }
@@ -51,7 +65,7 @@ export function Model({ position, scale, ior, gpu, fresnel, isSmallDevice }) {
                 scale={ scale }
                 rotation={[1.57, 0, 0]}
             >
-                { isSmallDevice || gpu.tier < 2
+                { isSmallDevice || isMediumDevice || gpu.tier < 2
                     ? <meshStandardMaterial color="gray" metalness={ 0.6 } roughness={ 0.17 } envMapIntensity={ 3.5 } />
                     : <MeshRefractionMaterial bounces={ 2 } ior={ ior } fresnel={ fresnel } envMap={ texture } />
                 }
