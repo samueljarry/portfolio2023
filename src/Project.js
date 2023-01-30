@@ -108,7 +108,7 @@ const Project = () =>
                 {
                     videos.map((video, index) =>
                     {
-                        return <video key={ index } src={ `../../projects/${video}` } controls={window.innerWidth < 1024} autoPlay loop muted={ true } />
+                        return <video key={ index } src={ `../../projects/${video}` } controls={window.innerWidth < 1024} autoPlay={window.innerWidth > 1024} loop muted={ true } />
                     })
                 }
                 {

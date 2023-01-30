@@ -10,11 +10,11 @@ extend({PlaneShaderMobile})
 const Gallery = ({ props }) =>
 {
     const { height, width, factor, isMediumDevice } = props
-    let current = isMediumDevice && (width*factor) > 720
+    let current = (width*factor) > 720
                     ? -height * 0.5
-                  : isMediumDevice && (width * factor) >= 650
+                  : (width * factor) >= 650
                     ? -height * 0.9
-                  : isMediumDevice && (width*factor) <= 720
+                  : (width*factor) <= 720
                     ? -height * 0.89
                   : !isMediumDevice && height * factor < 800
                     ? -height * 0.3
@@ -37,8 +37,6 @@ const Gallery = ({ props }) =>
                 step: 0.001
             }
     })
-
-    console.log(isMediumDevice)
 
     return (
         <>
