@@ -9,6 +9,7 @@ import { lerp } from "three/src/math/MathUtils";
 import {Text, useScroll} from "@react-three/drei";
 import { debounce } from "lodash";
 import {useNavigate} from "react-router-dom";
+
 extend({PlaneShader})
 
 const DesktopGallery = ({ props }) =>
@@ -138,9 +139,9 @@ const DesktopGallery = ({ props }) =>
         >
             <Leva hidden />
             {
-                projects.map(({name, cover }, index) =>
+                projects.map(({name, directory }, index) =>
                 {
-                    const texture = textureLoader.load(cover)
+                    const texture = textureLoader.load(`projects/${directory}/cover.png`)
                     return (
                         <mesh
                             key={ index }
@@ -149,7 +150,6 @@ const DesktopGallery = ({ props }) =>
                             }}
                             scale-x={  (width * 8) / width / 2 }
                             scale-y={    (height * 6) / height / 2}
-                            position-x={ meshTotalWidth * index}
                             userData={{extra: 0}}
                             onPointerOver={() => document.documentElement.style.cursor = "pointer"}
                             onPointerLeave={() => document.documentElement.style.cursor = "default"}

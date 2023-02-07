@@ -27,29 +27,34 @@ const Frame = ({ bloom, noise, smallDevice, mediumDevice }) =>
             if(!smallDevice && !mediumDevice)
             {
                 gsap.timeline()
-                    .set('.marquee_item span',
+                    // Marquee
+                    .add(() =>
+                    {
+                        document.querySelectorAll('.marquee_item span').forEach(span =>
                         {
-                            display: 'flex',
-                            y: "100%",
-                            opacity: 0,
+                            const randY = (Math.random() * 100) - 50
+                            gsap.set(span, {y: `${randY}%`, opacity: 0})
                         })
+                    })
                     .add(() => marqueeAnimation())
                     .to('.marquee_item span',
                         {
                             y:0,
+                            x: 0,
                             stagger:
                                 {
-                                    amount: 2,
-                                    ease: 'Sine.ease',
+                                    amount: 0.25,
+                                    from: "random"
                                 },
                             opacity: 1,
                             ease: 'Sine.ease',
-                            duration: 0.7,
-                            delay: 0.5
+                            duration: 0.75,
+                            delay: 0.7,
                         })
+                    // Post-Processing
                     .to(bloom.current,
                         {
-                            delay: 0.5,
+                            delay: 0.4,
                             intensity: 5,
                             duration : 0.9,
                             ease: 'Sine.ease'

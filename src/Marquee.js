@@ -2,6 +2,7 @@ import {useLayoutEffect, useRef} from "react";
 
 const Marquee = () =>
 {
+    // Voir Home.js pour l'animation
     const marquee = useRef()
     useLayoutEffect(() =>
     {
@@ -9,7 +10,6 @@ const Marquee = () =>
         const marqueeWrapper = marquee.current.parentNode.parentNode
         marqueeWrapper.style.zIndex = -1
     }, [])
-
     return (
         <div ref={marquee} className="header_marquee">
             <pre className="marquee_item">

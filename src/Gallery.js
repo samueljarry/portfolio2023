@@ -10,11 +10,11 @@ extend({PlaneShaderMobile})
 const Gallery = ({ props }) =>
 {
     const { height, width, factor, isMediumDevice } = props
-    let current = (width*factor) > 720
+    let current = isMediumDevice && (width*factor) > 720
                     ? -height * 0.5
-                  : (width * factor) >= 650
+                  : isMediumDevice && (width * factor) >= 650
                     ? -height * 0.9
-                  : (width*factor) <= 720
+                  : isMediumDevice && (width*factor) <= 720
                     ? -height * 0.89
                   : !isMediumDevice && height * factor < 800
                     ? -height * 0.3
@@ -38,11 +38,12 @@ const Gallery = ({ props }) =>
             }
     })
 
+
     return (
         <>
             <Leva hidden />
             {
-                projects.map(({name, phoneCover}, index) =>
+                projects.map(({name, directory}, index) =>
                 {
                     if(index !== 0) isMediumDevice && (width * factor) > 720
                                         ? current -= height * 0.8
@@ -56,7 +57,7 @@ const Gallery = ({ props }) =>
                                         ? current -= height * 0.65
                                         : current -= height * 0.55
 
-                    const texture = textureLoader.load(phoneCover)
+                    const texture = textureLoader.load(`projects/${directory}/phoneCover.png`)
 
                     return (
                         <mesh

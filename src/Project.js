@@ -11,11 +11,11 @@ const Project = () =>
 {
     const { name } = useParams()
     const navigate = useNavigate()
-
+    const [supportWebp, webp] = useState(false)
     const project = projects.find(project => project.name.toLowerCase() === name)
 
     const index = projects.findIndex(project => project.name.toLowerCase() === name)
-    const { description, videos, images, url, techs, banner, phoneBanner } = project
+    const { description, videos, images, url, techs, directory } = project
     const projectName = project.name
 
     const [smallDevice, setSmallDevice] = useState(false)
@@ -25,7 +25,7 @@ const Project = () =>
 
     const lenis = new Lenis({
         duration: 2.4,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // https://www.desmos.com/calculator/brs54l4xou
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
         direction: 'vertical', // vertical, horizontal
         gestureDirection: 'vertical', // vertical, horizontal, both
         smooth: true,
@@ -46,6 +46,18 @@ const Project = () =>
     {
         let smallWidth = 1024
         window.innerWidth < smallWidth ? setSmallDevice(true) : setSmallDevice(false)
+
+        // Check Webp support
+        async function supportsWebp()
+        {
+            const webpData = 'data:image/webp;base64,UklGRh4AAABXRUJQVlA4TBEAAAAvAAAAAAfQ//73v/+BiOh/AAA=';
+            const blob = await fetch(webpData).then(r => r.blob());
+            return createImageBitmap(blob).then(() => true, () => false);
+        }
+        (async () =>
+        {
+            webp(await supportsWebp())
+        })()
     }, [])
 
     return (
@@ -100,21 +112,26 @@ const Project = () =>
             <div
                 className="projects_cover lazyload"
                 style={{
-                    backgroundImage: `url(../../projects/${smallDevice ? phoneBanner : banner})`
-            }}
+                    backgroundImage: `url(../../projects/${directory}/${smallDevice ? 'phoneBanner' : 'banner'}.${supportWebp ? 'webp' : 'png'})`
+                }}
             >
             </div>
             <div className="projects_gallery">
                 {
                     videos.map((video, index) =>
                     {
-                        return <video key={ index } src={ `../../projects/${video}` } controls={window.innerWidth < 1024} autoPlay={window.innerWidth > 1024} loop muted={ true } />
+                        return <video key={ index } src={ `../../projects/${directory}/${video}#t=0.001` } controls={window.innerWidth < 1024} autoPlay={window.innerWidth > 1024} preload={"metadata"} loop muted={ true } />
                     })
                 }
                 {
                     images.map((image, index) =>
                     {
-                        return <img key={ index } className={image.includes('responsive') ? 'responsive lazyload' : 'lazyload'} src={`../../projects/${image}`} alt={`${projectName}`} />
+                        return <img
+                                    key={ index }
+                                    src={`../../projects/${directory}/${image}.${supportWebp ? 'webp' : 'png'}`}
+                                    className={image.includes('responsive') ? 'responsive lazyload' : 'lazyload'}
+                                    alt={`${projectName}`}
+                                />
                     })
                 }
             </div>
@@ -160,7 +177,9 @@ const Project = () =>
 
                             }}
                             className="next_project_cover lazyload"
-                            style={{backgroundImage: `url(../../${projects[index + 1].cover})`}}
+                            style={{
+                                backgroundImage: `url(../../projects/${projects[index + 1].directory}/cover.${supportWebp ? 'webp' : 'png'})`
+                        }}
                         />
                     </div>
 
